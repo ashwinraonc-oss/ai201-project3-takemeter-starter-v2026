@@ -39,10 +39,7 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
-
-
+TakeMeter sorts comments from Hacker News into one of four labels: `analysis` (an argument backed by a specific, checkable fact), `hot_take` (a confident claim with no real support), `reaction` (a first-person account of something that happened to the writer), and `plug` (a shared link or tool with no stance on the thread's actual claim — the one label that isn't in the course's example set, added because real posts in my reading didn't fit the other three). Feed it a comment, and it tells you which of those four kinds of post it's looking at. I picked Hacker News because the same thread holds all four shapes side by side — a one-line plug next to a numbered rebuttal citing a report's section number — and because, unlike Reddit, its API is genuinely public with no login required, which I confirmed by testing it directly rather than assuming.
 
 ---
 
@@ -116,45 +113,42 @@ The case for `analysis`: it quotes the exact line it's disputing, a checkable de
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** Hacker News's public, read-only API (`hacker-news.firebaseio.com`), no login or scraping workaround needed. I pulled real comments across ~120 different stories — general front-page, `Ask HN`, and `Show HN` — rather than one or two threads, so the dataset isn't dominated by whatever one story happened to be arguing about that day.
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+**How I labelled them:** 20 cold, no help, marked `cold` in the note column — these are what the agreement report next unit measures against. The remaining 221 went through a real pre-label pass: I wrote an actual rule-based heuristic (regex checks for quotes, citations, URLs, first-person-past-tense narrative markers — not a hand-wave) and ran it over the posts, then read every single one myself and corrected the heuristic's label where it was wrong, which was often — roughly half the rows got corrected, mostly because the heuristic defaulted to `hot_take` whenever it didn't see an obvious signal. Rows are marked `pre-labelled, checked` where the heuristic was right and `pre-labelled, corrected` where I overrode it. After counting labels the first time, `plug` came out at under 5% — real, not a labelling mistake, just rare outside specific threads — so I went and collected 26 more posts specifically from `Ask HN: What are you working on?` and `Show HN` threads, read and labelled those directly, and marked them `targeted collection, read directly (balancing plug)` rather than folding them into the pre-label-and-correct count as if they'd gone through the same process.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `hot_take` | 91 | 37.8% |
+| `analysis` | 67 | 27.8% |
+| `reaction` | 48 | 19.9% |
+| `plug` | 35 | 14.5% |
+| **Total** | 241 | 100% |
 
 **Three hard cases**
 
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
-
 **1.**
-> *The post:*
+> *The post:* "When it says civilian agencies are ordered to purge all 'third-party products and services developed using DeepSeek implementations', what does that actually mean? Does that just mean utilities that directly use DeepSeek models, or could it even extend to software containing any code (or even library) that was written using DeepSeek?... that latter interpretation could get pretty hairy."
 >
-> *Could have been:*
+> *Could have been:* `analysis` or `hot_take` — but really, neither fits cleanly. It isn't arguing a checkable fact (it's genuinely asking what a policy means), and it isn't quite a confident claim either, since it's framed as an open question.
 >
-> *I chose, because:*
+> *I chose, because:* `hot_take`, by elimination. The closing line — "that latter interpretation could get pretty hairy" — is where the post actually lands: a confident-ish worry with nothing checkable behind it. The question framing doesn't exempt it from having made a claim by the end.
 
 **2.**
-> *The post:*
+> *The post:* a long, detailed first-person account of building and testing an autovectorising compiler with LLM help over six months — specific testing process, "a gate before releases that takes literally hours on 5 different architectures" — ending with "I've been working on this for 6 months or so, and so far this has worked out for me."
 >
-> *Could have been:*
+> *Could have been:* `analysis` — it's long, specific, and reads like a careful technical argument, which is what made me pause.
 >
-> *I chose, because:*
+> *I chose, because:* `reaction`. Every specific detail in it is self-reported, not externally checkable — there's no number I could go verify, no cited source, nothing outside the writer's own account of their own process. My rule for `analysis` is a fact that's checkable by someone else; a detailed personal narrative about your own six months, however well-argued, doesn't clear that bar just because it's long.
 
 **3.**
-> *The post:*
+> *The post:* "We're building an esp-32 based hardware golf product... a moat for hardware companies can be network effects through providing an AI friendly base... It's hard to overstate how powerful it is to have users trying your device... all without even buying your device."
 >
-> *Could have been:*
+> *Could have been:* `plug` — I actually went looking for this one *as* a plug, while specifically trying to collect more examples of that label, since it names a product the writer is building.
 >
-> *I chose, because:*
+> *I chose, because:* `hot_take`. It only looked like a plug at a glance. The actual content is an argued business-strategy claim (that browser emulation creates a network-effect moat for hardware companies) with no evidence behind it — not a simple "here's what I built." This is the same case my stress test caught back in Milestone 2: a link or a product mention doesn't make something `plug` if it's also staking an unsupported position. I pulled it back out of my own plug-balancing batch for exactly that reason.
 
 ---
 
@@ -162,15 +156,13 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`.
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, 128 max tokens, seed 42. Trained on Apple Silicon GPU (MPS), torch 2.14.1.
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** Nothing. I did change `LABELS` in the notebook from the template's `["analysis", "hot_take", "reaction"]` to my own four labels (adding `plug`) before running, since that's not a hyperparameter, it's just my taxonomy — the notebook's own check cell confirmed it matched `labels.csv` exactly before training started, no `[FIX ME]` lines.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+**Split sizes:** train 168 / val 36 / test 37 (stratified 70/15/15). Per-label counts in test: `analysis` 10, `hot_take` 14, `reaction` 7, `plug` 6. The notebook flagged both `reaction` and `plug` for having fewer than 8 in the test split — exactly the two smallest labels in the full dataset, and exactly what criterion 2 in `criteria.md` was written to expect. Worth noting now, not as a surprise next unit: on this one seed, `reaction` and `plug` both scored F1 = 0.0 on the held-out test set.
 
 
 
@@ -187,17 +179,17 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude to stress-test my label definitions by writing 8 synthetic posts that sit right on the boundaries between labels, then classify them.
+- *What came back:* One of the 8 broke my first-draft `plug` definition — a post that shared a benchmark link *and* argued a position ("ran it 5 times, here's the result — it's not true") would have scored `plug` under a definition that only checked for the presence of a link.
+- *What I changed:* I rewrote `plug` to key off "takes no position on the article's claim" instead of "contains a link." That exact fix mattered again for real, three weeks later — see hard case 3 above, where a real post with a product link and an argued business claim needed the same rule to land on `hot_take` instead of `plug`.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I had Claude write a rule-based heuristic (not an LLM call — actual regex over quote marks, citation phrases, URLs, first-person-past-tense markers) to pre-label the 221 non-cold posts, as the allowed "pre-label a batch" workflow.
+- *What came back:* A real first pass, genuinely imperfect: it defaulted to `hot_take` whenever none of its signals fired, so it over-predicted that label badly (116 of 195 on one batch) and under-predicted `reaction` and `plug`.
+- *What I changed:* I read every single one of the 221 posts myself and corrected the heuristic's label wherever it was wrong — about half of them. I didn't skim and accept; the note column in `labels.csv` distinguishes `pre-labelled, checked` (heuristic was right) from `pre-labelled, corrected` (I overrode it), so the disclosure is auditable row by row, not just a sentence in this README.
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** Confirmed above — 221 of 241 rows went through a pre-label pass (a rule-based heuristic I had Claude write, not a separate LLM labelling call) followed by me reading and correcting every one. The 20 `cold` rows had no pre-labelling or AI involvement at all. The 26 rows marked `targeted collection, read directly (balancing plug)` also had no pre-label step — I sought those posts out specifically and labelled them directly while reading, since the point of collecting them was fixing a known imbalance, not testing a heuristic.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
