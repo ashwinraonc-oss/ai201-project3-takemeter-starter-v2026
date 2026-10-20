@@ -5,6 +5,7 @@
 #
 # Delete the examples below and put yours in.
 
-analysis: makes an argument backed by a specific, checkable fact
-hot_take: a confident claim with no support offered
-reaction: an immediate response to something that just happened
+analysis: makes an argument backed by a specific, checkable fact that carries the conclusion
+hot_take: a confident claim about the world with no real support offered
+reaction: a first-person account of something that happened to the writer
+plug: shares a link, tool, or resource without taking a position on the post's actual claim
