@@ -1,0 +1,96 @@
+text,label,note
+Do you share my opinion that the SEPPY CPU-running infrastructure is the Old New Coolness?,hot_take,"pre-labelled, checked"
+"Astra writes well (which is why I often like to work with it over Claude), but it tends to produce code golf that's borderline unreadable, like completely omitting line breaks. I thought I had something funky with my config, but it seems to be a known issue.
+https://lucumr.pocoo.org/2026/9/7/astra-why/
+EDIT: You can search for ""tenobrus astra"" on X, but link removed.
+The generated code certainly does what's asked of it, but it's as sloppy as anything else I've seen. I don't think this benchmark can control for that. Maybe if it had a metric for minimum diff to satisfy the new requirement with the existing constraints on dead code etc?",analysis,"pre-labelled, checked"
+"GCP status page is green, it's only visible in the Service Health in GCP Console when you switch to any of your project https://console.cloud.google.com/servicehealth/incidents
+Multiple Google Cloud services are experiencing elevated errors and intermittent network failures in europe-west2 region.
+Most recent update  – 19 minutes ago
+October 20, 2026 at 10:07:52 AM UTC+2
+Multiple services are experiencing issues in the europe-west2 region.
+We are experiencing an issue with multiple services in europe-west2 beginning on Monday, 2026-10-19 23:08 PDT.
+Our engineering team continues to investigate the issue.
+We will provide an update by Tuesday, 2026-10-20 02:00 PDT with current details.
+> We apologize to all who are affected by the disruption.",analysis,"pre-labelled, checked"
+"Yep, I'm pretty sure it was just b, we've got nothing running there now. Annoyingly one of our DBs failed to start after failover, so we're running around now.",reaction,cold
+"I just wish AI was brief.
+Don’t add filler words. Be straight to the point.",hot_take,"pre-labelled, checked"
+"This seems like an AI-generated summary and it leaves some obvious questions unanswered.
+This thread (linked by the page) seems like a better source: 
+https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/0R3XLJL6FuE
+Ian Carroll notes:
+> I think it's worth noting that this compromise is much worse than the private keys simply being stolen by a researcher. They are inherently weak single-byte keys that anyone can factor, and the issue cannot be contained.",analysis,"pre-labelled, corrected"
+Built a text based adventure. It works like D&D but with an agent as the GM. Feed it in campaigns and it builds a new one for you to play.,plug,"targeted collection, read directly (balancing plug)"
+"I set up a server that responds with a certificate to any host you request. You can use it to see if curl accepts the certificate or not.
+curl https://example.org --connect-to example.org::2.29.126.86:",plug,"pre-labelled, checked"
+"Interesting that the DHS ""Exclusion and Removal Order #2026-01"" that was made public yesterday was actually released July 24th, 2026 and appears to have taken effect then. Agencies would have started pulling deepseek at that time. Which means it's likely DS became aware of the memo around then.
+The release of this repo hours after the DHS order is a tactical move they started preparing when the DHS order was issued almost 3 months ago, and they timed publishing the repo right as the order hit the federal register.
+DHS: ""China bad and scary. Don't send them data.""
+DS: ""You don't have to. Happy xmass kids.""",analysis,"pre-labelled, checked"
+"AO3 rocks, as does the parent organization, the Organization for Transformative Works. They do a lot of pro bono legal work around free speech and copyright (which can be especially sticky around transformative works). AO3 has drawn ire and appreciation alike for their fierce free speech stance (which is, essentially, if it's against the law to exhibit in the state of New York (or against their TOS e.g. not a fanwork), it must come down. Everything -- EVERYTHING -- else stays.)
+I also love another of their programs, Fanlore[0], a treasure trove of obscure internet fanfiction works, social groupings, and tropes. Sort of a combination oral history + TVTropes-esque fanfic breakdown.
+Fanfiction is a beautiful thing and a great way to stretch creative writing muscles that can be helpful by being a bit less of a blank canvas than needing to invent characters and locations. Of course, a TON of fanfiction does invent, liberally, but I've seen people insist they can't write creatively, then make something beautiful when you ask them to rewrite a scene in their favorite show or book that they were disappointed with and boom, they just wrote their first fix-it fic[1].
+Also, praise be for AO3 having no news feed/algorithm, and instead an incredibly intricate tagging system. Makes it easy to find what you want, avoid what you don't (see free speech commitment), and feel liberated from algorithmic exhaustion.
+[0]: https://fanlore.org/wiki/Main_Page
+[1]: https://fanlore.org/wiki/Fix-it",analysis,"pre-labelled, corrected"
+"I hope the precedent doesn't change to trying to enforce fines on foreign companies by instead arresting and fining employees upon arrival to the UK.
+Though I guess we've already seen something similar in France with Telegram...",hot_take,"pre-labelled, checked"
+"Open knowledge systems like Wikipedia are not really defensible. Letting anybody edit any page is a great way to get AI and human slop everywhere. It makes it extremely easy to insert knowledge with dubious quality and sources.
+We need ""open access"" knowledge systems with known authors who are sponsored by non-profit and educational organizations and its their duty to defend their reputation.
+Humanity needs more openly accessible  curated and factually checked information and ""open to modify"" systems are bad at in all.",hot_take,"pre-labelled, corrected"
+"> Just as academics must cite any AI-generated machine outputs they rely upon in their research and writing, they can also cite Wikipedia if they use it in their work. Doing so can highlight Wikipedia’s value to other academics as a source of knowledge and provide greater transparency in one’s research processes. Despite longstanding skepticism of Wikipedia among some scholars, citations to Wikipedia in academic journals appear to be increasing – even in high-impact publications in subject areas like the health sciences.
+As someone who's contributed to Wikipedia and seen how the sausage is made: that's stupid. Even Wikipedia itself considers wikis (including itself) to lack sufficient authority to be cited as a source.
+Such citations could be easily gamed (if you cite a particular change) or are useless (the content you cite may not be there in the future), and are obvious pathways to ""citogenesis.""",analysis,"pre-labelled, checked"
+"Pricing:
+    Free or $14.99/mo - 2 links
+    $49.99/mo - 8 links
+    $149.99/mo - 20 links
+    $499.99/mo - unlimited links
+
+Source: https://www.facebook.com/help/1929252614431792",analysis,"pre-labelled, corrected"
+"> While researchers stopped short of concluding that the oil spill had caused the declines
+Why though? Why are we so afraid of accountability? Because this is what people point to when trying to deny things are true: ThErE iS NO EviDeNce, sHoW Me THe StUdY, etc. etc.",analysis,"pre-labelled, corrected"
+Great story and smart design choice using AI for background triage rather than just chat clutter. The voice-to-inbox flow is genuinely appealing—excited to see how this evolves!,hot_take,"pre-labelled, checked"
+Wikipedia has been the default result on Google for most things for years now.,hot_take,"pre-labelled, checked"
+"""Subaru is killing off gas cars and will only sell rebadged Toyota EVs in Europe.""
+Subaru was talking about an electric model over 20 years ago!  I saw the concept drawings.  Whoever has run Subaru for the last 20 years needs to be given a watch and thanked for their service on their way out the door.",reaction,"pre-labelled, corrected"
+"As someone who helps small businesses create their own websites... thank you Facebook!  Seriously though, back when ""Facebook Pages instead of websites"" were all the rage, FB demoting page content in feeds officially killed that movement and I was similarly happy.",reaction,"pre-labelled, corrected"
+"More info at the repo:
+https://github.com/celphase/duck-pond
+Also replies by author in this sub thread below:
+https://news.ycombinator.com/item?id=50131006#50135405",plug,"targeted collection, read directly (balancing plug)"
+I kind of like the idea because it gives you a different angle of using AI specifically for one area. I think that's the key for a lot of products instead of being extremely broad. However just by intuition I would argue that its to simple and to expensive for this. Do you have plans of building it out to make it the best in this area?,hot_take,"pre-labelled, checked"
+Paul Tyma is the creator of Mailinator. I remember reading about how he made it scalable with Java.,reaction,"pre-labelled, checked"
+A little too much going on all at once in the beginning. For a complex game like this I think you have to start small and slowly introduce functionality. Why are so many buttons available to me from minute 1? I'm not using them.,hot_take,"pre-labelled, checked"
+"Closed model unfortunately, continues the theme of TTS / STT being really not great for local deployments.",hot_take,"pre-labelled, checked"
+"The real magic of this thread is I wrote a script to download all of these fonts, then open each one in my editor so I can see each one in the wild. This is a really great exercise, thanks for opening up my eyes to bitmap fonts which I didn't know about.",reaction,cold
+"Whatever the consequences, I have to admit China has understood that all those are raw materials and that open sourcing everything will help growing their economy (as a whole).
+The worst idea was to build corporations providing services with AI. It was an extension of the latest 50 years model, which is about to crumble. Now, we have our revolution. (Ok, ok, I am a little bit too enthusiastic, I now need a fallout shelter).",hot_take,"pre-labelled, corrected"
+"HNowledge[1], a free iOS app for browsing the HN stories and comments I've upvoted. Made it to fit the way I browse HN, which is upvoting mainly what I find interesting and may want to come back to. The app lets you browse by date, domain or score, add notes and export. Apart from syncing your upvotes from HN, everything stays local without any tracking.
+[1]: https://apps.apple.com/us/app/hnowledge/id6813417548
+Wanes[2], an Apple Health logging interface for tracking how long symptoms last. I tend to have headaches quite often and the way Apple lets you enter that data is pretty limited, so I created an app which starts a Live Activity for one or more symptoms using widgets, Control Center or Siri. You can change the severity rating while it runs and stop it from wherever you are on your phone (Home Screen, Lock Screen, Dynamic Island, Siri).
+[2]: https://apps.apple.com/us/app/wanes/id6811679904",plug,"targeted collection, read directly (balancing plug)"
+"For me it was Revolut. No access to my main account, no withdrawals, no card payments since the morning. App doesn't work, there's no phone number to call, nobody to talk to. Dark side of neobanking, I guess.",reaction,"pre-labelled, corrected"
+"I had heard 27 was much better than 26, so I broke my usual embargo on new macOS versions until x.y.5 and upgraded. I also had a problem with the 26.6.7(?) update that came out the same day as 27.0, so I went for it. Big mistake. I regret it.
+ I also regret updating my homepods and ATV to 27.0. I had lots of phantom clicks on the tv remote. Turns out it was the homepods. When it happens I have to restart them to fix it.
+Never again. I will be on 27.x.y until 28.6 is released.",reaction,"pre-labelled, checked"
+You're looking for an answer but the truth is no one really knows because we don't know how good the models will get.,hot_take,"pre-labelled, checked"
+"Exactly, i saw the same thing. I think time to spawn agents.",hot_take,"pre-labelled, checked"
+"FlowCompute is an open-source, cross-platform user interface for OpenFOAM. The goal is to make computational fluid dynamics (CFD) as straightforward as possible.
+Main site: https://flowcompute.com
+Linux demo: https://www.youtube.com/watch?v=2V0Cg_nVLG0",plug,"targeted collection, read directly (balancing plug)"
+"I love that you made this, and that you told your story about why. Clearly a lot of thought went into it, both leading up to and during its construction. Thank you!
+Like others, I'm skeptical about the business model. That's not really a knock on you (and I wish you the best of luck), but rather with the whole ecosystem of these kinds of apps. There are three big problems:
+- Everyone and their aunt is trying to sell me monthly subscriptions for a few bucks. These add up, both in terms of $ and cognitive overhead (yet another subscription I need to remember to cancel if I stop using it...)
+- I don't own this system, I'm just renting it. This is a trade-off I'm less and less willing to make for a whole host of reasons including my ability to vibe code my own thing, open source, enshitification (or, perhaps more likely, you deciding to abandon this project in the future) etc
+- All the usual concerns about data security and privacy are heightened right now in this era of super-capable hacking agents and super-creepy AI companies
+As a user of things, vibecoding is the most exciting thing about AI. I can make anything I want to use, built exactly as I please. As a maker of things, vibecoding is the most damning thing about AI. Anyone can re-make anything I've made, built exactly as they please.",hot_take,"pre-labelled, checked"
+"No privacy by default. Mistral has never been private though...always 30 days.
+""Include enough detail about your legitimate reason for requesting ZDR. We review each request and may approve or deny it.""
+https://docs.mistral.ai/admin/monitor-comply/zero-data-retention",analysis,"pre-labelled, checked"
+"Its a bit of a SWE bonzai tree, but I built a Spring Application framework I'm using for personal projects https://github.com/Demilich-Digital/henge/tree/main/
+Basically, a modulith framework you can fork out to microservices. I don't get to claim to solo dev the next Bing thing, but I have codified and learned a lot of distributed system best practices and explored Spring and Convergent consistency methods.",plug,"targeted collection, read directly (balancing plug)"
+Google and Apple are going to move consumers and ordinary business users to edge inference. This is more disruptive to the upcoming IPOs than most investors understand.,hot_take,"pre-labelled, checked"
+"Author here :)
+TLDR: on Oct 2, 333 exits (~10% of Tor exits) started redirecting port 22 to 12 interception servers running a paramiko-based MITM that stole passwords and tried to drop Ebury on the target.",analysis,"pre-labelled, corrected"
