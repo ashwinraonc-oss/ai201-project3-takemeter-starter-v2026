@@ -54,33 +54,58 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `analysis`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** makes an argument backed by a specific, checkable fact — a stat, a quote, a date, a named source — and the fact has to carry the conclusion, not just decorate it.
 
 **Example 1:**
->
+> I would encourage reading the actual report, which is explicit that a previously unknown exploit was used to escape the sandbox: "Agents exploited a separate, previously unknown vulnerability in Artifactory to move beyond their sandbox environment and compromise the Hugging Face environment." — Section IV.A, p. 9
 
 **Example 2:**
->
+> This has actually been a trend since the 1960s: https://en.wikipedia.org/wiki/Bowling_Alone — The simple answer is media. First television, then internet, then smartphones.
+
+### `hot_take`
+
+**Definition:** states a confident claim about the world with no real support offered, even if it borrows the language of evidence.
+
+**Example 1:**
+> I am getting a bit concerned that Russia is actually planning an attack on Eastern Europe. It's just like red storm rising, their refineries have been blown up and their diesel will only last 6 months. They need to move now or they'll have to accept peace and economic prosperity.
+
+**Example 2:**
+> Ah, the "unusually unlucky" cables serving Taiwan and in the Baltics. Like statistically impossibly unlucky.
+
+### `reaction`
+
+**Definition:** a first-person account of something that happened to the writer, told as a personal story rather than a general claim.
+
+**Example 1:**
+> I remember when the iPhone first came out. I was at a bar... Then this guy at the table whipped out his phone and just ignored us all sitting there. I knew right then and there that this was the beginning of the end.
+
+**Example 2:**
+> Like 15 years ago now I had broken a filling. Went in to a new dentist... They told me I had 14 cavities, and 3 of my teeth needed crowns — and they were surprisingly rude about the whole ordeal.
+
+### `plug`
+
+**Definition:** shares a link, tool, or resource without taking a position on the post's actual claim — this is the label I didn't go in looking for; it's here because real posts in my reading didn't fit the other three.
+
+**Example 1:**
+> I'm also the developer of FluidCAD. It has an MCP you can wire to any LLM. It runs locally on your machine.
+
+**Example 2:**
+> I also did something similar with my personal website this summer: `curl listening.cailinpitt.com` shows what music I've been listening to recently.
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `analysis` and `hot_take`.
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The borderline post** (a reply in a passkeys discussion, rebutting the article it's replying to):
+> "...if attestation is the thing you're worried about, the post's own recommendation pushes you towards attestation rather than away from it!" It is plainly obvious that the worry isn't attestation per se, it's the restrictions that attestation may in the future require... I don't know if they failed to do so because they can't... or if they just are bad at reading the room...
+
+The case for `analysis`: it quotes the exact line it's disputing, a checkable detail — you can reread the article and verify the quote, then judge whether the logical gap it names actually holds. The case for `hot_take`: strip the quote away and the rest is a prediction about future corporate behavior and intent, asserted with confidence ("plainly obvious," "extremely clear to me") and nothing checkable behind it.
+
+**The decision rule I used every time:** if a post quotes or cites the specific claim it's rebutting and anchors its rebuttal to that quote, it's `analysis` — even if it goes on to speculate past it. The speculation riding along afterward doesn't downgrade the post, because the load-bearing part of the argument is the quote, not the speculation. Under this rule the passkeys post above is `analysis`.
+
+**Stress test:** I wrote 8 synthetic posts sitting on these boundaries and classified them against the definitions above before trusting them. One broke `plug`: a post that shared a benchmark link *and* argued a position ("ran it 5 times, here's the result — it's not true") would have scored as `plug` under my first draft, which only checked for the presence of a link. I rewrote the definition to key off "takes no position on the claim" instead of "contains a link," which is the wording above.
 
 
 
