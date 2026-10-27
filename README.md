@@ -234,7 +234,7 @@ The case for `analysis`: it quotes the exact line it's disputing, a checkable de
 | 1. Overall accuracy | ≥ 0.60 | 0.405 | 0.405 | 0.378 | *(Milestone 4)* |
 | 2. Every label F1 ≥ 0.50 | ≥ 0.50, all 4 | min F1 0.000 | min F1 0.000 | min F1 0.000 | *(Milestone 4)* |
 | 3. Balance (not seed-dependent — same CSV every run) | 15–40% each | hot_take 37.8%, analysis 27.8%, reaction 19.9%, plug 14.5% | *(same)* | *(same)* | *(Milestone 4)* |
-| 4. Agreement with staff labels | ≥ 24/30 | **blocked** — needs `data/staff_labels.csv` from a TF, which I don't have access to in this session | — | — | *(pending)* |
+| 4. Agreement with staff labels | ≥ 24/30 | 30/30 (100%) | *(same — not a per-seed measure)* | *(same)* | *(Milestone 4)* |
 | 5. Confidence: accuracy on most-confident third | ≥ 0.75 | 0.750 | 0.833 | 0.667 | *(Milestone 4)* |
 
 Raw numbers from `results_three_seeds_before.json` (device: `mps`, Apple Silicon GPU, torch 2.14.1), pasted straight from the notebook's section 6 spread table:
@@ -277,12 +277,12 @@ Seed 42, typed from the notebook's section 7 output:
 | 1 | Overall accuracy | ≥ 0.60 | **MISSED** | 0.405, 0.405, 0.378 — all three seeds well under 0.60. Not close on any of them. |
 | 2 | Every label F1 ≥ 0.50 | ≥ 0.50, all 4 labels | **MISSED** | `reaction` and `plug` score exactly 0.000 on all three seeds. The target needs all four labels to clear it; two never do, on any seed. |
 | 3 | Balance | 15–40% each | **MISSED** | `plug` is 14.5% of `labels.csv` — under my own 15% floor by half a point. Not seed-dependent; this is the same every run because it's a property of the CSV, not the training. |
-| 4 | Agreement with staff labels | ≥ 24/30 | **PENDING** | `data/staff_labels.csv` hasn't been provided by a TF in this session. `my_staff_labels.csv` is written and committed; `agreement.py` confirms the missing file and stops rather than running. Not fabricating a result for this one. |
+| 4 | Agreement with staff labels | ≥ 24/30 | **MET** | 30/30 (100%), well clear of the 24/30 target. `data/staff_labels.csv` arrived from the TF; `agreement.py` found zero disagreements against `my_staff_labels.csv`. |
 | 5 | Confidence (revised — see `criteria.md`) | ≥ 0.75, most-confident third, all 3 seeds | **MISSED** | 0.750, 0.833, 0.667 — seed 2024 falls under the target. Target has to hold across all three; it holds on two of three. |
 
 **Diagnoses**
 
-No agreement report to draw on this unit (criterion 4 is blocked), so I can't use it as evidence the way criterion 4's diagnosis is supposed to — I'm saying that plainly rather than writing a diagnosis that leans on data I don't have. For the misses I can actually diagnose:
+The agreement report (100%, zero disagreements, see Agreement Report below) is now in, and it points *away* from one of the four common causes rather than toward it: it's real evidence against "a boundary I applied inconsistently" as the explanation for criteria 1 and 2's misses. If I can hold a taxonomy I didn't write this consistently on a set staff built to include 7 genuinely hard cases, sloppy, inconsistent application of my own three-label rules across my own 271 rows is a less likely story than it would otherwise be. That leaves the diagnosis resting more squarely on the cause below — too little data for the minority labels — rather than splitting the blame between labelling and data volume.
 
 **Criteria 1 and 2 are the same diagnosis, not two.** The confusion matrix above already shows it: `reaction` (0 of 7 right) and `plug` (1 of 6 right) aren't confused with some specific other label — they're swallowed by `hot_take` specifically, and that pattern repeats on every seed, not just one. That rules out "genuinely hard label pair" (which would show confusion in both directions, and it doesn't — 0 `hot_take` posts were ever called `reaction` or `plug`) and it's consistent, not jumpy, which argues against "bad luck on one split." What's left is **too few examples for the minority labels**: in the seed-42 training split alone, `hot_take` got 63 training rows against `reaction`'s 34 and `plug`'s 24 — `hot_take` had 1.8–2.6× more to learn from. With a 4-way classification head trained from scratch on only 168 rows total, defaulting to the class it saw the most of is the cheapest way to minimize loss, and that's what it did. Criterion 1's low overall accuracy is a direct consequence of criterion 2's two dead labels, not an independent problem.
 
@@ -302,7 +302,7 @@ No agreement report to draw on this unit (criterion 4 is blocked), so I can't us
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** not yet measurable — blocked on `data/staff_labels.csv`, see below.
+**Agreement rate:** 30 / 30 = 100%.
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -324,19 +324,28 @@ No agreement report to draw on this unit (criterion 4 is blocked), so I can't us
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**Blocked, not skipped.** `my_staff_labels.csv` is written and committed — all 30 posts in `data/staff_posts.csv`, labelled under the staff taxonomy in `data/staff_taxonomy.md`, not my own. `data/staff_labels.csv` is the one file in this entire project that's supposed to come from a real person (a TF) rather than from me working alone, and I don't have it in this session. I ran `agreement.py` anyway to confirm it fails the way it's supposed to:
+**Zero disagreements.** `python agreement.py`, with `data/staff_labels.csv` from the TF and `my_staff_labels.csv` labelled earlier (and committed) under the staff taxonomy in `data/staff_taxonomy.md`, not my own:
 
 ```
 $ python agreement.py
-No file at data/staff_labels.csv.
-That's the staff labels. The posts ship in the starter under
-data/staff_posts.csv; the labels are what your TF sends you once
-your own are done. Ask in the help channel if you're missing either.
+Compared 30 posts.
+
+  agreed      30
+  disagreed   0
+  agreement   100%
+
+You matched staff on every post.
+Wrote agreement_results.json. Commit it.
 ```
 
-I'm not fabricating a staff answer key to fill in an agreement rate — that would make this entire section meaningless, since the whole point is comparing my labels against ones I didn't write. Once `data/staff_labels.csv` exists, running `python agreement.py` and filling in the rate, every disagreement's adjudication, and the three piles below is the remaining work for this section — nothing about the method changes, only the missing input.
+There's no adjudication table below because there's nothing to adjudicate — I can't write three piles of disagreements out of zero disagreements, and padding this section with manufactured disagreement would be worse than just saying the real number.
 
-**What the pattern in my disagreements tells me:** Can't say yet — see above.
+**What the pattern in my disagreements tells me:** that there isn't one is itself the finding, but the more useful question the script's own output asks — *was the set easy, or is the rule genuinely tight* — deserves a real answer rather than just taking the 100%. Staff's own notes flag 7 of the 30 as `HARD` (`sp_005`, `sp_010`, `sp_014`, `sp_019`, `sp_020`, `sp_028`, `sp_029`), so this wasn't an easy set by staff's own admission. I went back and checked my reasoning at the time I labelled each of those 7, not just the final label:
+
+- On **4 of the 7** (`sp_005`, `sp_010`, `sp_014`, `sp_020`), my own stated reasoning at the time matches staff's stated mechanism almost exactly — e.g. for `sp_014`, I wrote that it was `hot_take` because "the 3% is offered as a flourish, not as the reason," which is staff's rule 1 almost word for word, independently arrived at.
+- On the other **3** (`sp_019`, `sp_028`, `sp_029`), I landed on the correct label but my reasoning at the time was thinner than staff's — I wrote plain "confident general claim, no support" for `sp_019`, where staff's note explicitly names the harder tension: that it reads like a personal reflection (pulling toward `reaction`) but is actually a claim about everyone (rule 2). I got the right answer without fully articulating the specific thing that made it hard.
+
+So the honest read isn't "the rule is perfectly tight in my hands" — it's that the rule held up on the cases where I reasoned through its actual mechanism, and I got lucky-but-correct on a few where my stated reasoning wouldn't have caught a genuinely closer call. 100% on this set is real evidence that my 271-row dataset's problems (the F1 collapses in the Run Log above) are much more likely to be a **data-volume problem than a labelling-consistency problem** — if I can apply a taxonomy I didn't write this consistently on a set staff built to be hard, sloppy application of my *own* rules across my own 200+ rows is a less likely explanation for the model's failures than simply not having enough `reaction`/`analysis`/`plug` examples to learn from.
 
 
 
@@ -355,7 +364,7 @@ I'm not fabricating a staff answer key to fill in an agreement rate — that wou
 | 1. Overall accuracy | ≥ 0.60 | 0.463 | 0.512 | 0.488 | **MISSED** (still, but every seed moved up from before) |
 | 2. Every label F1 ≥ 0.50 | ≥ 0.50, all 4 | min F1 0.000 | min F1 0.000 | min F1 0.000 | **MISSED** — but *which* label is 0 changed, see below |
 | 3. Balance | 15–40% each | hot_take 33.6%, analysis 24.7%, plug 24.0%, reaction 17.7% | *(same)* | *(same)* | **MET** |
-| 4. Agreement with staff labels | ≥ 24/30 | still blocked — no `data/staff_labels.csv` | — | — | *(pending)* |
+| 4. Agreement with staff labels | ≥ 24/30 | 30/30 (100%) | *(same — unaffected by this change)* | *(same)* | **MET** |
 | 5. Confidence (revised), most-confident third | ≥ 0.75 | 0.769 | 0.846 | 0.769 | **MET** |
 
 Raw numbers from `results_three_seeds_after.json`:
@@ -386,8 +395,6 @@ Raw numbers from `results_three_seeds_after.json`:
 **Criterion 1 (overall accuracy ≥ 0.60) — still missed, 0.463/0.512/0.488.** What I'd do: the confusion matrix says this is still fundamentally a four-way classification problem being decided by which label has the most training rows, not which post actually fits which definition. The real fix is more data across the board, not just one label — `analysis` at 47 training rows and `reaction` at 34 are both still thin next to `hot_take`'s 63. I stopped after fixing one label because that's what this unit's rule asks for (one change, measured properly), not because I think it's solved.
 
 **Criterion 2 (every label F1 ≥ 0.50) — still missed, now for `analysis` and `reaction` instead of `plug` and `reaction`.** What I'd do: add real examples to `analysis` next, the same way I just did for `plug`, and watch specifically for whether `analysis` recovers at `plug`'s expense the way `plug` recovered at `analysis`'s expense this time — that would mean the model doesn't have enough overall capacity or data to hold more than 2–3 labels distinctly at once, which would be a more serious finding than "one label is thin." I stopped here because that's a second, separate change, and this unit's improvement was already spent.
-
-**Criterion 4 (agreement with staff labels) — blocked, not missed.** `my_staff_labels.csv` is done and committed. The only thing standing between this and a verdict is `data/staff_labels.csv` from a TF, which I don't have in this session. I stopped because fabricating it isn't a legitimate way to finish — the measurement only means something if the answer key is real.
 
 
 
