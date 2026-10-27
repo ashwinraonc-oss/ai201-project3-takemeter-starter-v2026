@@ -648,3 +648,141 @@ Linux demo: https://www.youtube.com/watch?v=2V0Cg_nVLG0",plug,"targeted collecti
 Built a text based adventure. It works like D&D but with an agent as the GM. Feed it in campaigns and it builds a new one for you to play.,plug,"targeted collection, read directly (balancing plug)"
 "I've been pretty curious to see if I can help reduce LLM hallucinations by giving LLM's more deterministic tools. My current attempt is something like the old StatWing but instead of a GUI, it has an mcp interface for LLM's. A demo, with very limited llm budget and might run out if heavily used, is at https://statimedes.com. I haven't built the GUI to upload a random csv's, but I did load the Telco churn data I found on Kaggle.
 I've also experimented with the Brazil purchase data from Olist. That was pretty fun because it has more than on csv. The tool managed pretty well and was able to come to statistically correct conclusions.",plug,"targeted collection, read directly (balancing plug)"
+"After consuming my whole usage window in a few minutes multiple times, I realised I needed  a hook to do some checks for me and prompt me before submitting when cache had expired and content is too big, so that it can suggest me to ""compact then send"". It can also prevent sub-agents from spawning when above 80% usage window. Control is handed over to the user.
+The first I built, based on hooks (run for 75 days), the biggest burst fell from 365 agent spawned to 27, and requests over 500k tokens of context from 14.5% to 0.6%. Lockouts still went up, because lots of parallel main sessions use up the window too. The strength is that it counts agents across every session on the machine.
+I built https://github.com/rbartoli/agent-usage-guard, MIT-licensed, makes no network calls, needs Claude Code 2.1.287 or later.
+I have also a post on this:  https://rblab.com/what-stops-claude-code-burning-your-usage-window/",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"i love the feature where you can select a song to compare to.
+My little sister asked me to turn music into notation. I built https://om-intelligence.ch/projects/vocal-notation/vocal-notation.html
+feel free to integrate that into your app, the architecture might be a way around mac only..
+It might be able to turn any song into singable notation then.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Looks awesome! Will give it a try. I've built something similar, just open-sourced it:
+https://exawatt.ai
+I'm big on agent ergonomics. Cool to see what others are doing in the space.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+A while back I was frustrated when wanting to buy a keyboard that there were no triangle-shaped keyboards or circle-shaped keyboards. This lack of peculiar keyboard shapes gave me the idea to make a keyboard that could be reconfigurable into any shape my heart desired. I’m still working on the firmware and making more keys but I wanted to share my progress so far. Heres the source if anyone’s interested in how I made it: https://github.com/notaroomba/keybytes,plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Really fun to watch. I liked that the lines between stories are the paths the diggers fly, not topic links.
+Curious: did you think about linking stories that share a topic? Or is the randomness on purpose?
+I'm building something similar that links news, people and places, so this was nice to see.
+(English isn't my first language, so I used a translator.)",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I made nearly the same idea but centered around semantic search with a pluggable embedding service and sqlite caching https://github.com/Sornaensis/adrai so it's just a CLI tool you tell your agents to use.
+ADRs are organized by a domain hierarchy and can relate directly to individual files and path globs.
+I find this absolutely improves cohesive development because it lets analysis and review agents scope ADRs with `adrai relevant path/to/file.rs` and `adrai search ""blah blah""` And the ADR coverage can be more comprehensive and well organized without leading to too much context bloat if the models have to rediscover things all the time.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I've built a niche Ghidra extension that managed to form a userbase. Haven't put much effort into publicizing it, it just kinda snowballed on its own through word-of-mouth. In fact, I keep stumbling into Discord forums where I then learn that I had users there that I've never heard about before.
+Word-of-mouth happens when someone who has a need finds your project, uses it and likes it so much they talk about it to other potential users. It's effectively a chain reaction and the way to leverage it is to make something people want to use.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+Quite a few years ago now I built the jasmin_smsc_gui for fun and ended up with 23 stars and 18 forks. I think its pertinent to say first of all how it came about which primarily to make my own life easier owing to the fact that I used the Jasmin SMSC gateway a lot in my own business. In addition I had a number of customers who also used it and the most frustrating thing about it was the GUI (basically there was none) and any config or adding a new customer or new route was done via a series of Telnet commands (anyone remember those ?). How did people find it? Probably because it really did make life a lot easier for many existing and new Jasmin users.,plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Love it! I am getting ready to post my app here, and found hissingkitty easy to use, and looking forward to linking to it on FB and X.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+You could check out the Jobs module or remote work platforms.,plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I made a smash up of the arcade games SmashTV and Gauntlet.
+https://smash-gauntlet.atomic14.com/",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Hi HN,
+I'm obsessive about my phone, and those who are paying the bill are my two babies. When I get off work, I spend time with them, but the phone is glued to my hand. I'll catch myself looking up and I haven't been connecting with them at all. I'm getting better.
+So I experimented with everything, including what all the usual advice on reddit says:
+- Screen Time with passcode. This worked for several days. But I created the passcode so I knew it and I just typed in the passcode and unlocked. Nearly all of the iPhone blocker apps are built on top of Screen Time so they suffer the same problem. Screen Time can also be circumvented by a few tricks that I won't go into here.
+- Handing over your passcode to a friend. Works, but sometimes I actually do need an app, say a web browser, and I can't keep bothering someone every time I need it locked or unlocked.
+- A physical time-lock box. Yeah, this one actually does work, and I would recommend it. Just not if you need your phone - authenticator, phone calls, alarm, maps, banking apps, mobile wallet.
+Next I discovered Assistive Access, which is built into iOS and substitutes the home screen with just the apps you select. Believe me, you'll end up so bored by your phone you won't want to use it. However, this method has the same flaw: it has its own passcode, and if you know it, you can get out of it.
+But Assistive Access is cruel in one respect. When you create the passcode, it offers to add a recovery Apple Account. If you pass on that, and you don't remember the passcode, there is no freakin way out. Your only escape hatch is erasing your phone and restoring everything, and you do not want to do that.
+So the fix: don't know the passcode.
+Honestly, you don't need my app for this. Let a friend or your partner set the Assistive Access passcode for you, skip the recovery account, and you're done. If that works for you, great.
+I wanted to get this done myself every time, on demand, without relying on someone. However you do it I am sure you will like it. This is the only thing that has worked for me and I am reclaiming my evenings.
+That's what Screen Fasting does:
+1. Select the duration of your fast.
+2. We create a 4 digit passcode, you type it in as a 14-15 digit sequence with fake outs and deletes. Once setup is complete, you can't remember what you actually typed.
+3. Until the time you selected runs out, there is no way back. When it does, we send you the passcode by email.
+So don't just click everything when selecting your allowed apps. Leave Phone, Messages and any others you'll need if anything happens.
+For iPhone/iPad only, iOS 17+ We have to keep the passcode so we can send it back to you when your fast ends.
+Note: this is just the Assistive Access passcode, not the passcode on your iPhone or Apple ID password. It is only an Assistive Access specific passcode, which means it cannot be used to unlock your phone or access your data.
+Any feedback for me, particularly in the setup flow: where did you get stuck & wanted to quit?",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Hi,
+This is my first post although I have been following Hacker News for years.
+I have been building something similar except not for Minecraft but hiking maps on mobile (Android). This is my app: https://play.google.com/store/apps/details?id=com.chessvortexgames.maps
+I combine OpenStreetMap data for routes, satellite data from Sentinel-2 and Copernicus DEM GLO-30 for heights, resolution is around 10m/pixel for image and 30m for heights - those are the highest resolution datasets I can legally redistribute, although I am also including what I call hi-res maps building for some countries (USA, France, Italy, Switzerland, Austria, Romania) which has image resolution at 1.5m/pixel instead of 10m.
+I could have used higher resolution for hi-res maps, data is available at precision like 30-50cm/pixel but this being a mobile app I needed to consider storage for a map on mobile, at hi-res a 10x10 km squared area takes around 25MB.
+The idea for this came from my own hiking trips, in many mountains there is not so good internet connection, so I can build an offline map beforehand and in terrain I can use this to see where I am in 3D - and just use the phone GPS for location, no data needed.
+For building the map packages I have setup a linux server that combines all 3 data sources (OpenStreetMap, Sentinel-2, Copernicus GLO-30) so once an area is chosen it can build it in like 1-3 minutes. Since all OSM endpoints are giving lots of timeouts I setup a local OSM mirror with the data that I need - takes around 50GB of storage for the whole world data and I have a script that updates it weekly.
+Coming back to the original post, seeing 1:1 ratio of Switzerland made my heart stop for a bit, then I realized it's 1m resolution. Switzerland was also my first choice for hi-res data, they provide good accurate image and height datasets. Pretty cool all this Minecraft voxel rendering, I intend to see how it would look in my own app.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Disappointing that they didn't toss in an image showing the difference between 6T and 4T.  Here's a good one:
+https://semiwiki.com/forum/threads/samsung-teases-16-layer-3d-dram-with-vct-dram-as-a-stepping-stone-for-future-ram.20285/",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I built a free USCIS form-filling tool (no Adobe required)
+USCIS forms still use XFA PDFs, which don’t let you edit in most browsers. Even with Adobe, fields break, and getting the signature is hard.
+So I converted the PDF form into modern, browser-friendly web forms - and kept every field 1:1 with the original. You fill the form, submit it, and get the official USCIS PDF filled.
+https://fillvisa.com/demo/
+What Fillvisa does:
+- Fill USCIS forms directly in your browser - no Adobe needed
+- 100% free
+- No login/account required
+- Autosave as you type
+- Local-only storage (your data never leaves the browser)
+- Clean, mobile-friendly UI
+- Generates the official USCIS PDF, ready to submit
+- Built-in signature pad
+I just wanted a fast, modern, free way to complete the actual USCIS form itself without the PDF headaches. This is a beta version",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"S&P 500 correlation matrix (created with Svelte).
+Currently trying to better contextualize the visible subregion of the matrix in relation to the full dataset (beyond what the current minimap does).
+https://cybernetic.dev/matrix",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Want to put local history on a map, so when I go somewhere I could ideally just open this webapp and immediately get presented with cool or interesting history that happened close by.
+Currently spending time establishing relationships with historical societies, as I really need them to contribute points of interest, and stories. Many of these societies are run on a voluntary basis by 70+ year olds, so it's a long process. Getting some good responses eventually though, so it might actually go somewhere, just a lot slower than I want.
+Also still doing https://wheretodrink.beer, but haven't added anything of note since playing on this other project.
+And react2shell was a blast",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I'm working on an affordable SaaS platform for small and mid-sized fabrication shops across the US and Canada. It automates quoting and production for sheet-metal and CNC jobs and can handle pretty much any CAD format, even full assemblies. On the AI side, we've got a mix of models doing the heavy lifting: a tuned geometric transformer for feature detection, a graph neural net for topology, and a vision model for mesh segmentation. All that ties into our custom CAD logic for geometry parsing, 2D nesting for laser/machining, and 3D nesting for forming and packaging. The whole idea is to level the playing field so smaller local shops can compete with the big instant-quote guys without needing an in-house dev team.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Building pyreqwest, a high-performance Python HTTP client backed by Rust’s reqwest. It has gotten quite feature rich: async and sync APIs, similar ergonomic interface of reqwest, full type hints, and built-in testing/mocking. It has no unsafe code, and no Python-side dependencies. (Started after getting too annoyed with all the issues httpx has.)
+https://github.com/MarkusSintonen/pyreqwest",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Embar: https://github.com/carderne/embar
+A Python ORM, inspired by Drizzle and the like. Whenever I come to Python I'm frustrated by the ORM options. They generally lack type-safety on inputs and outputs, or useful type hints.
+SQLAlchemy is an institution but I think it's hard to use if it's not your full-time job. I check the docs for every query. I want something simple for the 80-99% of cases, that lets you drop easily into raw SQL for the remaining %.
+I'm going to keep hacking at it, would love to from anyone who thinks this is worthwhile (or not). Also:
+- The interface for update queries is clunky. Should I add codegen?
+- Should I try to implement a SQL diffing engine (for migrations). Or just vendor sqldef/similar...?",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I'm working on porting KiCad to the browser. It's a lot of sweat and tears, multithreading issues and some more sweat. I've updated a port of WxWidgets and now I support all the features KiCad needs with ~200 tests.
+Right now I have a build that loads in the browser, but I really want to have ""multithreading"" which means workers in the web. One can use asyncify with emscripten to translate blocking C++ to WASM, but that transition is not perfect, right now I'm debugging a bug where there's a race condition that halts all execution and the main thread runs in an infinite loop waiting for the workers to stand up. I guess I'll have a few of those ahead.
+The main goal is to 1. just have fun 2. use yjs as a collab backend so multiple people can edit the same PCB. This will probably work with pcbnew, KiCad's layout editor, since it has a plugin system and AFAIK I can do the sync layer there. For the rest ( schematic, component editor etc. ) I'll have to figure out something..
+KiCad does not sync automatically if you modify a file, I'll have to do some lifting there.
+Anyway, it's a lot of fun, I really want this thing to exist, I'm hoping that I won't run into a ""wellll, this is just not going to work"" kind of issue in the end.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I have just released a map of median rents in Berlin [0]. Now I'm improving it. I want people to enter their search criteria, and get an idea of how rare and expensive their desired apartment would be.
+This will help people set clear expectations for their apartment search.
+[0]: https://allaboutberlin.com/tools/rent-map",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I'm working on ""Cargo but for C"".
+It started out as something marginally more useful than vendoring your dependencies as submodules + baking in the knowledge of how to build a bunch of common projects.
+I realized, though, that there was somehow a huge gap in the insane world of C build tools. There's nothing that:
+- Lets you pin really precisely and builds everything from source (i.e. no binary repository)
+- Does not depend on either a scripting language or a completely insane DSL (Conan uses Python, CMake is an eldritch horror, ditto Make, lots of other tools of course but none of them quite hit the mark)
+- Has a good balance of ""builds are data"" and ""builds are code"".
+Anyway, it's going great. There are, of course, a ton of problems to solve. Chief among them is the obvious caveat that C is not a monoculture like Rust. There will be zero upstream libraries that use this tool natively. But I don't think it matters. I think I can build something which is as much better to the existing tools as, say, UV was to existing Python tools, even with that disadvantage.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"https://play.google.com/store/apps/details?id=com.blazingbanana.whistle
+Completely free, no ads, no in-app purchases and no accounts / network required offline voice transcription.
+I have also built the macOS/Windows/Linux versions which I'll also make free to download and available on my site soon (https://blazingbanana.com/).
+iOS version is built and works (extremely well), just waiting for the Apple Developer signup process to complete.
+Big shout out to https://github.com/mybigday/whisper.rn and https://huggingface.co/ggerganov/whisper.cpp/tree/main for making this even possible.
+Any suggestions are welcome.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I shared this last month, but I’m still having a lot of fun working on it.
+I made a daily word puzzle called Tiled Words.
+https://tiledwords.com
+Currently about 2,000 people play every day and I’ve released 59 puzzles!
+One feature I’m excited about is crowdsourcing puzzles. Today’s puzzle is a “community puzzle” made entirely from clues that players submitted! I plan to do this every week or two.
+I wrote about launching and the first month of puzzles if you want to learn more!
+https://paulmakeswebsites.com/writing/a-month-of-tiled-words/",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"I’m working on a video game, purely for fun.
+Here is a work in progress build:
+https://muffinman-io.itch.io/space-deck-x
+It is a combination of a shoot-em-up and deck building. You fly and shoot until you get to the boss, when you get your deck out to fight them.
+That genre combination is definitely  too ambitious, but I think it is fun to play and I’m enjoying making it.
+I have a bunch of ideas how to combine the two parts better. But over the years, I’ve learned to control scope creep and actually ship pet projects.
+Right now I’m in a middle of changing how enemy waves are spawned. After that I want to make a short tutorial and add two more bosses as well as more enemies.
+If you end up playing it, please share your feedback I’ll be glad to hear it.
+The game is made using Kaplay, a game dec library which brings me joy to use. I can best describe it as my friend described Pico-8: “easy things are easy”. But compared to Pico-8, Kaplay doesn’t have virtual console limitations and comes with a big library of components. Try it out, the community is small, but the library itself is really fun and easy to use.
+EDIT: For context, this is about two weeks of work, in the evenings when my kid is asleep.",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Open sourcing a system where you might have notes in markdown to build a knowledge base, and review them according to a schedule, but also Anki like flash cards attached to each note.
+All notes are simple markdown file stored locally.
+I’ve been using it to benefit my research and make the knowledge to stick better on my head for several years. My base is more than 400 markdown notes now, and I sync them to a private GitHub repository.
+https://github.com/odosui/mt",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Building a simple service that allows one to post live activities to mobile devices (iOS to begin with).
+It started as something I wanted to build for myself. I have a Bosch dishwasher that lacks any glanceable indication of how far along it is. Bosch provides an app, but checking the progress takes too long to be useful.
+I figured live activities was a good fit, and then realized that I am not alone in wanting something like this. So, I am trying to make it into something usable for all the home automation tinkerers.
+https://getaivi.app",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"Making a first aid kit for stingray stings! If there are lifeguards nearby they’ll usually treat you, but we think it would be nice to have a “go bag” in the back of your car for scenarios where there aren’t lifeguards (remote beaches, or after sunset, etc). The standard of care is to clean the wound and submerge it in water around 110-120F for 1-2 hours. We’ve been researching the best, safest method to get that heat, and working on putting a package together. Here’s our first attempt:
+https://mydragonskin.com/products/stingray-treatment-kit",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
+"https://mytinycafe.com/
+An PWA primarily for my wife and my daughter. They can order their hot chocolate and their coffee as if they were going to grab something at a fancy café downtown, but instead it's at home and I'm the barista. It is quite nice to have for when my wife comes back from work and want something specific, or when we are waiting for the visit of a few friend, they can order exactly the available beverages and everything is ready when they're here.
+It was also a good playground for me to implement Web Push notifications (to never miss new orders).
+It's a basic Nuxt 3 app with Appwrite as the backend with rough edges, but much enough for our household use !
+If you want to spam my phone with notifications, please visit my café : https://mytinycafe.com/alix",plug,"targeted collection, read directly (Milestone 5 improvement, more plug examples)"
