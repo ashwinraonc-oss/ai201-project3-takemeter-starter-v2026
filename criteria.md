@@ -89,6 +89,10 @@ Among predictions where the model's top predicted probability is at least 0.80, 
 
 **Why this target:** a confident wrong answer is worse than an unsure wrong answer, because it doesn't ask for a second look. 0.75 sits meaningfully above the 0.60 overall-accuracy floor in criterion 1 — confident predictions should be a real cut above the average case, not just the same accuracy relabelled — but I'm not demanding near-perfect calibration, because with only ~200 training examples I'd expect the model's confidence itself to be somewhat noisy, not perfectly tuned.
 
+> **Revised in unit 6:** Among the third of predictions the model was most confident about, accuracy is at least 0.75, holding across all three seeds.
+>
+> **Why revised:** the original names an absolute probability cutoff (≥0.80), but the notebook's `confidence_report()` in `takemeter.ipynb` section 5 doesn't expose a per-example probability I can threshold against — it only computes accuracy on the top and bottom thirds by confidence, as an aggregate. I can't produce a verdict on "≥0.80" from what the harness actually measures, only on "the most confident third," which is a genuinely different quantity (a relative rank, not an absolute threshold) — not a looser version of the same thing, a different thing entirely. This is a measurability gap, not a target I found inconvenient: I'm revising to the number I can actually check.
+
 ---
 
 <!-- ─────────────────────────────────────────────────────────────────────────

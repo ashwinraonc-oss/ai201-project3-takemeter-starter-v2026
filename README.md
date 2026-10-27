@@ -274,22 +274,21 @@ Seed 42, typed from the notebook's section 7 output:
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.60 | **MISSED** | 0.405, 0.405, 0.378 — all three seeds well under 0.60. Not close on any of them. |
+| 2 | Every label F1 ≥ 0.50 | ≥ 0.50, all 4 labels | **MISSED** | `reaction` and `plug` score exactly 0.000 on all three seeds. The target needs all four labels to clear it; two never do, on any seed. |
+| 3 | Balance | 15–40% each | **MISSED** | `plug` is 14.5% of `labels.csv` — under my own 15% floor by half a point. Not seed-dependent; this is the same every run because it's a property of the CSV, not the training. |
+| 4 | Agreement with staff labels | ≥ 24/30 | **PENDING** | `data/staff_labels.csv` hasn't been provided by a TF in this session. `my_staff_labels.csv` is written and committed; `agreement.py` confirms the missing file and stops rather than running. Not fabricating a result for this one. |
+| 5 | Confidence (revised — see `criteria.md`) | ≥ 0.75, most-confident third, all 3 seeds | **MISSED** | 0.750, 0.833, 0.667 — seed 2024 falls under the target. Target has to hold across all three; it holds on two of three. |
 
 **Diagnoses**
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
+No agreement report to draw on this unit (criterion 4 is blocked), so I can't use it as evidence the way criterion 4's diagnosis is supposed to — I'm saying that plainly rather than writing a diagnosis that leans on data I don't have. For the misses I can actually diagnose:
 
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
+**Criteria 1 and 2 are the same diagnosis, not two.** The confusion matrix above already shows it: `reaction` (0 of 7 right) and `plug` (1 of 6 right) aren't confused with some specific other label — they're swallowed by `hot_take` specifically, and that pattern repeats on every seed, not just one. That rules out "genuinely hard label pair" (which would show confusion in both directions, and it doesn't — 0 `hot_take` posts were ever called `reaction` or `plug`) and it's consistent, not jumpy, which argues against "bad luck on one split." What's left is **too few examples for the minority labels**: in the seed-42 training split alone, `hot_take` got 63 training rows against `reaction`'s 34 and `plug`'s 24 — `hot_take` had 1.8–2.6× more to learn from. With a 4-way classification head trained from scratch on only 168 rows total, defaulting to the class it saw the most of is the cheapest way to minimize loss, and that's what it did. Criterion 1's low overall accuracy is a direct consequence of criterion 2's two dead labels, not an independent problem.
+
+**Criterion 3 shares that same root cause.** `plug` sitting at 14.5% instead of 15%+ isn't a labeling slip — I already pushed it from under 5% to 14.5% in unit 5 by deliberately collecting more from plug-dense threads, and documented at the time that `plug` is genuinely rare in general Hacker News discussion outside specific thread types. The miss here and the two F1 misses above are one underlying fact (not enough `plug` and `reaction` examples) showing up in three different measurements, not three separate causes.
+
+**Criterion 5 doesn't fit the pattern as cleanly, and I don't want to force it to.** Seeds 42 and 7 cleared 0.75; seed 2024 didn't (0.667). That's a single-seed miss, not a consistent one like criteria 1–2 — which could mean a plain bad draw rather than a structural problem. It could also be downstream of the same majority-collapse issue (if the model's "most confident" predictions are disproportionately easy `hot_take` guesses, how many of those happen to land in the confident third is itself sensitive to the split) — but I don't have enough evidence here to pick between those two explanations with confidence, and I'd rather say that than pick the more flattering one.
 
 
 
@@ -303,7 +302,7 @@ Seed 42, typed from the notebook's section 7 output:
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** not yet measurable — blocked on `data/staff_labels.csv`, see below.
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -325,25 +324,19 @@ Seed 42, typed from the notebook's section 7 output:
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+**Blocked, not skipped.** `my_staff_labels.csv` is written and committed — all 30 posts in `data/staff_posts.csv`, labelled under the staff taxonomy in `data/staff_taxonomy.md`, not my own. `data/staff_labels.csv` is the one file in this entire project that's supposed to come from a real person (a TF) rather than from me working alone, and I don't have it in this session. I ran `agreement.py` anyway to confirm it fails the way it's supposed to:
 
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+```
+$ python agreement.py
+No file at data/staff_labels.csv.
+That's the staff labels. The posts ship in the starter under
+data/staff_posts.csv; the labels are what your TF sends you once
+your own are done. Ask in the help channel if you're missing either.
+```
 
-**What the pattern in my disagreements tells me:**
+I'm not fabricating a staff answer key to fill in an agreement rate — that would make this entire section meaningless, since the whole point is comparing my labels against ones I didn't write. Once `data/staff_labels.csv` exists, running `python agreement.py` and filling in the rate, every disagreement's adjudication, and the three piles below is the remaining work for this section — nothing about the method changes, only the missing input.
+
+**What the pattern in my disagreements tells me:** Can't say yet — see above.
 
 
 
