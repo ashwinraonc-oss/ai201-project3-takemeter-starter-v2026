@@ -1,0 +1,225 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 37,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 37,
+    "accuracy": 0.24324324324324326,
+    "f1_macro": 0.15709459459459457,
+    "per_label": {
+      "analysis": {
+        "precision": 0.25925925925925924,
+        "recall": 0.7,
+        "f1": 0.37837837837837834,
+        "support": 10
+      },
+      "hot_take": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 14
+      },
+      "plug": {
+        "precision": 0.2,
+        "recall": 0.3333333333333333,
+        "f1": 0.25,
+        "support": 6
+      },
+      "reaction": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 7
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "Do you share my opinion that the SEPPY CPU-running infrastructure is the Old New Coolness?",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Astra writes well (which is why I often like to work with it over Claude), but it tends to produce code golf that's borderline unreadable, like completely omitting line breaks. I thought I had something funky with my config, but it seems to be a known issue.\nhttps://lucumr.pocoo.org/2026/9/7/astra-why/\nEDIT: You can search for \"tenobrus astra\" on X, but link removed.\nThe generated code certainly does what's asked of it, but it's as sloppy as anything else I've seen. I don't think this benchmark can control for that. Maybe if it had a metric for minimum diff to satisfy the new requirement with the existing constraints on dead code etc?",
+      "gold": "analysis",
+      "predicted": "plug"
+    },
+    {
+      "text": "GCP status page is green, it's only visible in the Service Health in GCP Console when you switch to any of your project https://console.cloud.google.com/servicehealth/incidents\nMultiple Google Cloud services are experiencing elevated errors and intermittent network failures in europe-west2 region.\nMost recent update  \u2013 19 minutes ago\nOctober 20, 2026 at 10:07:52 AM UTC+2\nMultiple services are experiencing issues in the europe-west2 region.\nWe are experiencing an issue with multiple services in europe-west2 beginning on Monday, 2026-10-19 23:08 PDT.\nOur engineering team continues to investigate the issue.\nWe will provide an update by Tuesday, 2026-10-20 02:00 PDT with current details.\n> We apologize to all who are affected by the disruption.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Yep, I'm pretty sure it was just b, we've got nothing running there now. Annoyingly one of our DBs failed to start after failover, so we're running around now.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I just wish AI was brief.\nDon\u2019t add filler words. Be straight to the point.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "This seems like an AI-generated summary and it leaves some obvious questions unanswered.\nThis thread (linked by the page) seems like a better source: \nhttps://groups.google.com/a/mozilla.org/g/dev-security-policy/c/0R3XLJL6FuE\nIan Carroll notes:\n> I think it's worth noting that this compromise is much worse than the private keys simply being stolen by a researcher. They are inherently weak single-byte keys that anyone can factor, and the issue cannot be contained.",
+      "gold": "analysis",
+      "predicted": "plug"
+    },
+    {
+      "text": "Built a text based adventure. It works like D&D but with an agent as the GM. Feed it in campaigns and it builds a new one for you to play.",
+      "gold": "plug",
+      "predicted": "plug"
+    },
+    {
+      "text": "I set up a server that responds with a certificate to any host you request. You can use it to see if curl accepts the certificate or not.\ncurl https://example.org --connect-to example.org::2.29.126.86:",
+      "gold": "plug",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Interesting that the DHS \"Exclusion and Removal Order #2026-01\" that was made public yesterday was actually released July 24th, 2026 and appears to have taken effect then. Agencies would have started pulling deepseek at that time. Which means it's likely DS became aware of the memo around then.\nThe release of this repo hours after the DHS order is a tactical move they started preparing when the DHS order was issued almost 3 months ago, and they timed publishing the repo right as the order hit the federal register.\nDHS: \"China bad and scary. Don't send them data.\"\nDS: \"You don't have to. Happy xmass kids.\"",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "AO3 rocks, as does the parent organization, the Organization for Transformative Works. They do a lot of pro bono legal work around free speech and copyright (which can be especially sticky around transformative works). AO3 has drawn ire and appreciation alike for their fierce free speech stance (which is, essentially, if it's against the law to exhibit in the state of New York (or against their TOS e.g. not a fanwork), it must come down. Everything -- EVERYTHING -- else stays.)\nI also love another of their programs, Fanlore[0], a treasure trove of obscure internet fanfiction works, social groupings, and tropes. Sort of a combination oral history + TVTropes-esque fanfic breakdown.\nFanfiction is a beautiful thing and a great way to stretch creative writing muscles that can be helpful by being a bit less of a blank canvas than needing to invent characters and locations. Of course, a TON of fanfiction does invent, liberally, but I've seen people insist they can't write creatively, then make something beautiful when you ask them to rewrite a scene in their favorite show or book that they were disappointed with and boom, they just wrote their first fix-it fic[1].\nAlso, praise be for AO3 having no news feed/algorithm, and instead an incredibly intricate tagging system. Makes it easy to find what you want, avoid what you don't (see free speech commitment), and feel liberated from algorithmic exhaustion.\n[0]: https://fanlore.org/wiki/Main_Page\n[1]: https://fanlore.org/wiki/Fix-it",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I hope the precedent doesn't change to trying to enforce fines on foreign companies by instead arresting and fining employees upon arrival to the UK.\nThough I guess we've already seen something similar in France with Telegram...",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Open knowledge systems like Wikipedia are not really defensible. Letting anybody edit any page is a great way to get AI and human slop everywhere. It makes it extremely easy to insert knowledge with dubious quality and sources.\nWe need \"open access\" knowledge systems with known authors who are sponsored by non-profit and educational organizations and its their duty to defend their reputation.\nHumanity needs more openly accessible  curated and factually checked information and \"open to modify\" systems are bad at in all.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "> Just as academics must cite any AI-generated machine outputs they rely upon in their research and writing, they can also cite Wikipedia if they use it in their work. Doing so can highlight Wikipedia\u2019s value to other academics as a source of knowledge and provide greater transparency in one\u2019s research processes. Despite longstanding skepticism of Wikipedia among some scholars, citations to Wikipedia in academic journals appear to be increasing \u2013 even in high-impact publications in subject areas like the health sciences.\nAs someone who's contributed to Wikipedia and seen how the sausage is made: that's stupid. Even Wikipedia itself considers wikis (including itself) to lack sufficient authority to be cited as a source.\nSuch citations could be easily gamed (if you cite a particular change) or are useless (the content you cite may not be there in the future), and are obvious pathways to \"citogenesis.\"",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Pricing:\n    Free or $14.99/mo - 2 links\n    $49.99/mo - 8 links\n    $149.99/mo - 20 links\n    $499.99/mo - unlimited links\n\nSource: https://www.facebook.com/help/1929252614431792",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "> While researchers stopped short of concluding that the oil spill had caused the declines\nWhy though? Why are we so afraid of accountability? Because this is what people point to when trying to deny things are true: ThErE iS NO EviDeNce, sHoW Me THe StUdY, etc. etc.",
+      "gold": "analysis",
+      "predicted": "plug"
+    },
+    {
+      "text": "Great story and smart design choice using AI for background triage rather than just chat clutter. The voice-to-inbox flow is genuinely appealing\u2014excited to see how this evolves!",
+      "gold": "hot_take",
+      "predicted": "plug"
+    },
+    {
+      "text": "Wikipedia has been the default result on Google for most things for years now.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "\"Subaru is killing off gas cars and will only sell rebadged Toyota EVs in Europe.\"\nSubaru was talking about an electric model over 20 years ago!  I saw the concept drawings.  Whoever has run Subaru for the last 20 years needs to be given a watch and thanked for their service on their way out the door.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "As someone who helps small businesses create their own websites... thank you Facebook!  Seriously though, back when \"Facebook Pages instead of websites\" were all the rage, FB demoting page content in feeds officially killed that movement and I was similarly happy.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "More info at the repo:\nhttps://github.com/celphase/duck-pond\nAlso replies by author in this sub thread below:\nhttps://news.ycombinator.com/item?id=50131006#50135405",
+      "gold": "plug",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I kind of like the idea because it gives you a different angle of using AI specifically for one area. I think that's the key for a lot of products instead of being extremely broad. However just by intuition I would argue that its to simple and to expensive for this. Do you have plans of building it out to make it the best in this area?",
+      "gold": "hot_take",
+      "predicted": "plug"
+    },
+    {
+      "text": "Paul Tyma is the creator of Mailinator. I remember reading about how he made it scalable with Java.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "A little too much going on all at once in the beginning. For a complex game like this I think you have to start small and slowly introduce functionality. Why are so many buttons available to me from minute 1? I'm not using them.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Closed model unfortunately, continues the theme of TTS / STT being really not great for local deployments.",
+      "gold": "hot_take",
+      "predicted": "plug"
+    },
+    {
+      "text": "The real magic of this thread is I wrote a script to download all of these fonts, then open each one in my editor so I can see each one in the wild. This is a really great exercise, thanks for opening up my eyes to bitmap fonts which I didn't know about.",
+      "gold": "reaction",
+      "predicted": "plug"
+    },
+    {
+      "text": "Whatever the consequences, I have to admit China has understood that all those are raw materials and that open sourcing everything will help growing their economy (as a whole).\nThe worst idea was to build corporations providing services with AI. It was an extension of the latest 50 years model, which is about to crumble. Now, we have our revolution. (Ok, ok, I am a little bit too enthusiastic, I now need a fallout shelter).",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "HNowledge[1], a free iOS app for browsing the HN stories and comments I've upvoted. Made it to fit the way I browse HN, which is upvoting mainly what I find interesting and may want to come back to. The app lets you browse by date, domain or score, add notes and export. Apart from syncing your upvotes from HN, everything stays local without any tracking.\n[1]: https://apps.apple.com/us/app/hnowledge/id6813417548\nWanes[2], an Apple Health logging interface for tracking how long symptoms last. I tend to have headaches quite often and the way Apple lets you enter that data is pretty limited, so I created an app which starts a Live Activity for one or more symptoms using widgets, Control Center or Siri. You can change the severity rating while it runs and stop it from wherever you are on your phone (Home Screen, Lock Screen, Dynamic Island, Siri).\n[2]: https://apps.apple.com/us/app/wanes/id6811679904",
+      "gold": "plug",
+      "predicted": "analysis"
+    },
+    {
+      "text": "For me it was Revolut. No access to my main account, no withdrawals, no card payments since the morning. App doesn't work, there's no phone number to call, nobody to talk to. Dark side of neobanking, I guess.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I had heard 27 was much better than 26, so I broke my usual embargo on new macOS versions until x.y.5 and upgraded. I also had a problem with the 26.6.7(?) update that came out the same day as 27.0, so I went for it. Big mistake. I regret it.\n I also regret updating my homepods and ATV to 27.0. I had lots of phantom clicks on the tv remote. Turns out it was the homepods. When it happens I have to restart them to fix it.\nNever again. I will be on 27.x.y until 28.6 is released.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "You're looking for an answer but the truth is no one really knows because we don't know how good the models will get.",
+      "gold": "hot_take",
+      "predicted": "plug"
+    },
+    {
+      "text": "Exactly, i saw the same thing. I think time to spawn agents.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "FlowCompute is an open-source, cross-platform user interface for OpenFOAM. The goal is to make computational fluid dynamics (CFD) as straightforward as possible.\nMain site: https://flowcompute.com\nLinux demo: https://www.youtube.com/watch?v=2V0Cg_nVLG0",
+      "gold": "plug",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I love that you made this, and that you told your story about why. Clearly a lot of thought went into it, both leading up to and during its construction. Thank you!\nLike others, I'm skeptical about the business model. That's not really a knock on you (and I wish you the best of luck), but rather with the whole ecosystem of these kinds of apps. There are three big problems:\n- Everyone and their aunt is trying to sell me monthly subscriptions for a few bucks. These add up, both in terms of $ and cognitive overhead (yet another subscription I need to remember to cancel if I stop using it...)\n- I don't own this system, I'm just renting it. This is a trade-off I'm less and less willing to make for a whole host of reasons including my ability to vibe code my own thing, open source, enshitification (or, perhaps more likely, you deciding to abandon this project in the future) etc\n- All the usual concerns about data security and privacy are heightened right now in this era of super-capable hacking agents and super-creepy AI companies\nAs a user of things, vibecoding is the most exciting thing about AI. I can make anything I want to use, built exactly as I please. As a maker of things, vibecoding is the most damning thing about AI. Anyone can re-make anything I've made, built exactly as they please.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "No privacy by default. Mistral has never been private though...always 30 days.\n\"Include enough detail about your legitimate reason for requesting ZDR. We review each request and may approve or deny it.\"\nhttps://docs.mistral.ai/admin/monitor-comply/zero-data-retention",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Its a bit of a SWE bonzai tree, but I built a Spring Application framework I'm using for personal projects https://github.com/Demilich-Digital/henge/tree/main/\nBasically, a modulith framework you can fork out to microservices. I don't get to claim to solo dev the next Bing thing, but I have codified and learned a lot of distributed system best practices and explored Spring and Convergent consistency methods.",
+      "gold": "plug",
+      "predicted": "plug"
+    },
+    {
+      "text": "Google and Apple are going to move consumers and ordinary business users to edge inference. This is more disruptive to the upcoming IPOs than most investors understand.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Author here :)\nTLDR: on Oct 2, 333 exits (~10% of Tor exits) started redirecting port 22 to 12 interception servers running a paramiko-based MITM that stole passwords and tried to drop Ebury on the target.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    }
+  ]
+}
