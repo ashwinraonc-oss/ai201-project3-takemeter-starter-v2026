@@ -344,24 +344,38 @@ I'm not fabricating a staff answer key to fill in an agreement rate — that wou
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** Added 30 more real `plug` examples to `labels.csv` (241 → 271 rows), collected and labelled the same way as before — real Hacker News comments, read and judged directly, no fabrication. Most came from a dedicated monthly "Ask HN: What Are You Working On?" thread, which turned out to be a much denser source than general front-page threads. Nothing else changed: same model, same hyperparameters, same three seeds, one file different.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** Milestone 4's diagnosis named `plug` specifically — it was tied for the worst F1 (0.000 on every seed, same as `reaction`) *and* it was the one also failing its own balance criterion (14.5%, under my 15% floor), so fixing the thinnest, most-constrained label was the single change with the clearest paper trail pointing at it.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.60 | 0.463 | 0.512 | 0.488 | **MISSED** (still, but every seed moved up from before) |
+| 2. Every label F1 ≥ 0.50 | ≥ 0.50, all 4 | min F1 0.000 | min F1 0.000 | min F1 0.000 | **MISSED** — but *which* label is 0 changed, see below |
+| 3. Balance | 15–40% each | hot_take 33.6%, analysis 24.7%, plug 24.0%, reaction 17.7% | *(same)* | *(same)* | **MET** |
+| 4. Agreement with staff labels | ≥ 24/30 | still blocked — no `data/staff_labels.csv` | — | — | *(pending)* |
+| 5. Confidence (revised), most-confident third | ≥ 0.75 | 0.769 | 0.846 | 0.769 | **MET** |
 
-**Did it help, and how do I know:**
+Raw numbers from `results_three_seeds_after.json`:
 
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.463 | 0.512 | 0.488 | 0.049 |
+| Macro F1 | 0.284 | 0.326 | 0.314 | 0.042 |
+| F1 — `analysis` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `hot_take` | 0.609 | 0.636 | 0.564 | 0.072 |
+| F1 — `reaction` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `plug` | 0.526 | 0.667 | 0.692 | 0.166 |
+
+**Did it help, and how do I know:** Yes and no, honestly, and the "no" part is the more interesting finding.
+
+**It clearly worked for the thing I targeted.** `plug` went from F1 = 0.000 on every seed to 0.526 / 0.667 / 0.692 — the single biggest, cleanest move in this whole unit. Overall accuracy and macro F1 both went up on every seed too (accuracy +0.058 to +0.110, macro F1 roughly +0.10–0.18 depending on seed), and two criteria flipped from MISSED to MET: balance (3) and confidence (5).
+
+**But it didn't fix the task, and it broke something I wasn't trying to touch.** `analysis` — which had a real, if weak, nonzero F1 before (0.167, 0.154, 0.000) — now scores exactly 0.000 on **every** seed, same as `reaction`. The seed-42 confusion matrix after shows why: 3 real `analysis` posts that the model might have caught before are now going to `plug` instead of `hot_take`, and the model's capacity to tell `analysis` apart from anything seems to have been spent making room for `plug`. `reaction` — the label I didn't touch — is still exactly 0.000 on every seed, completely unmoved, which is the expected, uninteresting control: no new `reaction` data, no change in its score.
+
+**So the honest one-sentence version:** adding real examples to the thinnest label fixed that label convincingly and improved the two aggregate numbers, but it didn't fix criterion 1 or criterion 2 overall — it just moved which specific label was failing, trading a weak `analysis` for a dead one. That's a real result, not a success story, and I'd rather report the trade than round it up to "it worked."
 
 
 
@@ -369,7 +383,11 @@ I'm not fabricating a staff answer key to fill in an agreement rate — that wou
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+**Criterion 1 (overall accuracy ≥ 0.60) — still missed, 0.463/0.512/0.488.** What I'd do: the confusion matrix says this is still fundamentally a four-way classification problem being decided by which label has the most training rows, not which post actually fits which definition. The real fix is more data across the board, not just one label — `analysis` at 47 training rows and `reaction` at 34 are both still thin next to `hot_take`'s 63. I stopped after fixing one label because that's what this unit's rule asks for (one change, measured properly), not because I think it's solved.
+
+**Criterion 2 (every label F1 ≥ 0.50) — still missed, now for `analysis` and `reaction` instead of `plug` and `reaction`.** What I'd do: add real examples to `analysis` next, the same way I just did for `plug`, and watch specifically for whether `analysis` recovers at `plug`'s expense the way `plug` recovered at `analysis`'s expense this time — that would mean the model doesn't have enough overall capacity or data to hold more than 2–3 labels distinctly at once, which would be a more serious finding than "one label is thin." I stopped here because that's a second, separate change, and this unit's improvement was already spent.
+
+**Criterion 4 (agreement with staff labels) — blocked, not missed.** `my_staff_labels.csv` is done and committed. The only thing standing between this and a verdict is `data/staff_labels.csv` from a TF, which I don't have in this session. I stopped because fabricating it isn't a legitimate way to finish — the measurement only means something if the answer key is real.
 
 
 
