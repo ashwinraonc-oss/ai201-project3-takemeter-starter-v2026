@@ -231,27 +231,37 @@ The case for `analysis`: it quotes the exact line it's disputing, a checkable de
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.60 | 0.405 | 0.405 | 0.378 | *(Milestone 4)* |
+| 2. Every label F1 ≥ 0.50 | ≥ 0.50, all 4 | min F1 0.000 | min F1 0.000 | min F1 0.000 | *(Milestone 4)* |
+| 3. Balance (not seed-dependent — same CSV every run) | 15–40% each | hot_take 37.8%, analysis 27.8%, reaction 19.9%, plug 14.5% | *(same)* | *(same)* | *(Milestone 4)* |
+| 4. Agreement with staff labels | ≥ 24/30 | **blocked** — needs `data/staff_labels.csv` from a TF, which I don't have access to in this session | — | — | *(pending)* |
+| 5. Confidence: accuracy on most-confident third | ≥ 0.75 | 0.750 | 0.833 | 0.667 | *(Milestone 4)* |
+
+Raw numbers from `results_three_seeds_before.json` (device: `mps`, Apple Silicon GPU, torch 2.14.1), pasted straight from the notebook's section 6 spread table:
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.405 | 0.405 | 0.378 | 0.027 |
+| Macro F1 | 0.185 | 0.184 | 0.137 | 0.047 |
+| F1 — `analysis` | 0.167 | 0.154 | 0.000 | 0.167 |
+| F1 — `hot_take` | 0.571 | 0.583 | 0.549 | 0.034 |
+| F1 — `reaction` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `plug` | 0.000 | 0.000 | 0.000 | 0.000 |
+
+Accuracy only moved 0.027 across seeds — under the notebook's own 10-point threshold for "unstable," so by that measure this is "stable enough to trust." But stable isn't the same as good here: `reaction` and `plug` score exactly 0.000 on **every single seed**, not just a bad draw on one. That consistency is itself informative — it means the model reliably fails the same way regardless of which posts land in the test split, which is a different (and worse) finding than if the F1s had been jumpy.
 
 ### Confusion matrix
 
-<!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
-     An image of a matrix earns nothing. -->
+Seed 42, typed from the notebook's section 7 output:
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| true \ predicted | analysis | hot_take | reaction | plug |
+|---|---|---|---|---|
+| **analysis** | 1 | 9 | 0 | 0 |
+| **hot_take** | 0 | 14 | 0 | 0 |
+| **reaction** | 0 | 7 | 0 | 0 |
+| **plug** | 1 | 5 | 0 | 0 |
 
-**My biggest off-diagonal number, and what it means:**
-<!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
-     direction. "7 real analysis posts were called hot_take and only 3 went the
-     other way" is a direction, not just an error rate. -->
+**My biggest off-diagonal number, and what it means:** 9 real `analysis` posts were called `hot_take`, and 0 real `hot_take` posts went the other way — a one-directional collapse, not a two-way confusion. But the more complete picture is that this isn't really an `analysis`/`hot_take` boundary problem specifically: every single `reaction` post (7 of 7) and 5 of 6 `plug` posts were also called `hot_take`. The model isn't confusing two similar labels with each other; it's defaulting to the majority label whenever it isn't confident, across all three minority labels at once. That points at the dataset's size and balance (criterion 3's 37.8%/14.5% split, on only 168 training rows) as the more likely cause than any single boundary being hard — a diagnosis Milestone 4 below works through properly.
 
 
 
