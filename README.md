@@ -392,8 +392,7 @@ Raw numbers from `results_three_seeds_after.json`:
 
 
 **The gap between what I meant my labels to capture and what the model
-learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
+learned:** My four labels were meant to separate *how an argument is made* — a checkable fact, an unsupported claim, a personal story, or no claim at all — but both confusion matrices show the model learning something much blunter: "is this the single most statistically common phrasing pattern in the training set, or not." Rather than finding the actual boundaries between the four, it collapsed whichever labels had the least data into whichever label had the most (`hot_take` before, still `hot_take` plus now `analysis` after) — it learned a frequency heuristic standing in for my taxonomy, not the taxonomy itself.
 
 
 
