@@ -191,6 +191,18 @@ The case for `analysis`: it quotes the exact line it's disputing, a checkable de
 
 **Pre-labelling disclosure:** Confirmed above — 221 of 241 rows went through a pre-label pass (a rule-based heuristic I had Claude write, not a separate LLM labelling call) followed by me reading and correcting every one. The 20 `cold` rows had no pre-labelling or AI involvement at all. The 26 rows marked `targeted collection, read directly (balancing plug)` also had no pre-label step — I sought those posts out specifically and labelled them directly while reading, since the point of collecting them was fixing a known imbalance, not testing a heuristic.
 
+**Moment 3 (unit 6)**
+
+- *What I asked for:* the notebook's own `biggest_confusion()` cell is written to report only the single largest off-diagonal pair (`9 analysis posts called hot_take`). I asked Claude not to stop there and to read every row of the matrix before writing the diagnosis.
+- *What came back:* the full matrix showed every `reaction` post and most `plug` posts were *also* going to `hot_take`, with zero traffic the other direction anywhere, from a tool that would have let me report just the one headline pair and call it an `analysis`/`hot_take` boundary problem.
+- *What I changed:* the diagnosis in Milestone 4 names this correctly from the start as one majority-class sink pulling in all three minority labels at once, not a single hard boundary — which is why Milestone 5's fix was adding training rows to the thinnest label rather than trying to sharpen one boundary.
+
+**Moment 4 (unit 6)**
+
+- *What I asked for:* once the real staff answer key arrived, I asked Claude to check not just whether my 30 staff-set labels matched (they did, 30/30), but whether my *stated reasoning at the time* matched staff's reasoning on the 7 posts staff flagged as genuinely hard — not just the final label.
+- *What came back:* on 4 of those 7, my original reasoning named the same mechanism staff did (e.g. "the number is decoration, not the reason" for the canonical rule-1 case). On the other 3, I'd landed on the correct label without explicitly naming the specific tension staff called out — a real difference between applying the rule and getting lucky at the margin.
+- *What I changed:* I reported 100% honestly rather than as unqualified success — the Agreement Report section says plainly that 4-of-7 solidly-reasoned and 3-of-7 correct-but-thin is a different, more useful claim than "I got them all right."
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -399,7 +411,7 @@ Raw numbers from `results_three_seeds_after.json`:
 
 
 **The gap between what I meant my labels to capture and what the model
-learned:** My four labels were meant to separate *how an argument is made* — a checkable fact, an unsupported claim, a personal story, or no claim at all — but both confusion matrices show the model learning something much blunter: "is this the single most statistically common phrasing pattern in the training set, or not." Rather than finding the actual boundaries between the four, it collapsed whichever labels had the least data into whichever label had the most (`hot_take` before, still `hot_take` plus now `analysis` after) — it learned a frequency heuristic standing in for my taxonomy, not the taxonomy itself.
+learned:** My four labels were meant to separate *how an argument is made* — a checkable fact, an unsupported claim, a personal story, or no claim at all — but both confusion matrices show the model learning something much blunter: whichever label currently has the most training rows becomes the default guess for everything it's unsure about. Before, that dumping ground was `hot_take` alone (it absorbed nearly every `analysis`, `reaction`, and `plug` miss); after giving `plug` more data, `plug` became a *second* dumping ground sitting alongside `hot_take` rather than a label the model reliably recognizes — `analysis`'s misses now split between the two of them instead of going to just one. It learned a frequency heuristic standing in for my taxonomy, not the taxonomy itself.
 
 
 
